@@ -1,0 +1,14 @@
+{
+  "name": "hazardiq",
+  "version": "1.0.0",
+  "description": "HAZARDIQ — AI-Powered Multi-Hazard Risk & Relocation Intelligence Platform",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "dev:server": "npm run dev --prefix server",
+    "build": "npm run build --prefix frontend && npm run build --prefix server",
+    "start": "npm run start --prefix server",
+    "test": "node tests/test_capacity_engine.mjs && node tests/test_legacy_endpoints.mjs && node tests/test_incidents.mjs && node tests/test_targeted_notifications.mjs",
+    "ml:train": "python backend/app/ml/linuxone_ml_pipeline.py"
+  }
+}
