@@ -1,0 +1,159 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { ShieldCheck, Lock, PhoneCall, Building2, MapPin } from 'lucide-react';
+import { useApp } from '../context/AppContext';
+
+export const Footer: React.FC = () => {
+  const { t, language } = useApp();
+
+  return (
+    <footer className="bg-slate-950 text-slate-400 border-t border-slate-800 mt-auto">
+      {/* Operational Authority Strip */}
+      <div className="bg-slate-900 border-b border-slate-800 px-4 py-3 text-center">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-3 text-xs">
+          <span className="inline-flex items-center gap-1.5 font-bold text-emerald-400">
+            <ShieldCheck className="h-4 w-4 text-emerald-400" />
+            <span>
+              {language === 'ta'
+                ? 'அதிகாரப்பூர்வ அரசு பேரிடர் மேலாண்மை & முடிவெடுக்கும் தளம்'
+                : 'OFFICIAL GOVERNMENT DISASTER MANAGEMENT & DECISION-SUPPORT PLATFORM'}
+            </span>
+          </span>
+          <span className="text-slate-600">•</span>
+          <span className="text-slate-300 font-medium">
+            {language === 'ta'
+              ? 'பெருநகர சென்னை மாநகராட்சி & தமிழ்நாடு மாநில பேரிடர் மேலாண்மை ஆணையம்'
+              : 'Greater Chennai Corporation & Tamil Nadu State Disaster Management Authority'}
+          </span>
+          <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800/80 font-mono text-[11px] font-bold">
+            GCC • TNSDMA
+          </span>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          {/* Col 1: Brand & About */}
+          <div className="md:col-span-2 space-y-3">
+            <div className="flex items-center gap-3">
+              <img
+                src="/assets/logo.png"
+                alt="HAZARDIQ Logo"
+                className="h-9 w-9 object-contain drop-shadow-md"
+              />
+              <div className="flex items-center gap-2">
+                <span className="text-xl font-black text-white font-sans">
+                  HAZARD<span className="text-red-500">IQ</span>
+                </span>
+                <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                  CHENNAI COMMAND
+                </span>
+              </div>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed max-w-lg">
+              {t.coreMessage1}
+            </p>
+            <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-amber-300 font-semibold flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4 flex-shrink-0 text-amber-400" />
+              <span>{t.coreMessage2}</span>
+            </div>
+          </div>
+
+          {/* Col 2: Emergency Response Helplines */}
+          <div className="space-y-2 text-xs">
+            <h4 className="text-slate-200 font-bold uppercase tracking-wider text-xs">
+              {language === 'ta' ? 'அவசர கட்டுப்பாட்டு உதவி எண்கள்' : 'Emergency Control Helplines'}
+            </h4>
+            <ul className="space-y-1.5 text-slate-400">
+              <li>
+                <strong className="text-slate-300">
+                  {language === 'ta' ? 'ஒருங்கிணைந்த அவசர எண்:' : 'Unified Emergency:'}
+                </strong>{' '}
+                <span className="text-red-400 font-bold">112</span>
+              </li>
+              <li>
+                <strong className="text-slate-300">
+                  {language === 'ta' ? 'மாநில பேரிடர் மையம்:' : 'State Disaster Desk:'}
+                </strong>{' '}
+                1070
+              </li>
+              <li>
+                <strong className="text-slate-300">
+                  {language === 'ta' ? 'மாவட்ட கட்டுப்பாட்டு மையம்:' : 'District Control:'}
+                </strong>{' '}
+                1077
+              </li>
+              <li>
+                <strong className="text-slate-300">
+                  {language === 'ta' ? 'சென்னை மாநகராட்சி வெள்ள உதவி:' : 'GCC Flood Helpline:'}
+                </strong>{' '}
+                1913
+              </li>
+              <li>
+                <strong className="text-slate-300">
+                  {language === 'ta' ? 'அதிகாரம்:' : 'Authority:'}
+                </strong>{' '}
+                TNSDMA & GCC Unified Command
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: Portal Links (How It Works is removed) */}
+          <div className="space-y-2 text-xs">
+            <h4 className="text-slate-200 font-bold uppercase tracking-wider text-xs">
+              {language === 'ta' ? 'விரைவு இணைப்புகள்' : 'Quick Access'}
+            </h4>
+            <ul className="space-y-1.5">
+              <li>
+                <Link to="/risk-map" className="hover:text-white transition-colors">
+                  {t.navRiskMap}
+                </Link>
+              </li>
+              <li>
+                <Link to="/safe-areas" className="hover:text-white transition-colors">
+                  {t.navSafeAreas}
+                </Link>
+              </li>
+              <li>
+                <Link to="/relocation" className="hover:text-white transition-colors">
+                  {t.navRelocation}
+                </Link>
+              </li>
+              <li>
+                <Link to="/alerts" className="hover:text-white transition-colors">
+                  {t.navAlerts}
+                </Link>
+              </li>
+              <li>
+                <Link to="/report" className="hover:text-white transition-colors">
+                  {t.navReport}
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar with discrete Gateway to Admin Login */}
+        <div className="border-t border-slate-900 pt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+          <p>© 2026 HAZARD<span className="text-red-500">IQ</span> — Greater Chennai Disaster Management Platform. All Rights Reserved.</p>
+          
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-slate-400 font-mono hidden sm:inline">Greater Chennai Metropolitan Region</span>
+            
+            {/* Dedicated "Open Admin Console" Gateway Button (Prompt Section 8) */}
+            <Link
+              to="/admin/login"
+              className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors py-1.5 px-3 rounded-lg bg-slate-900 hover:bg-slate-800 border border-emerald-800/70 font-bold shadow-xs"
+              title="Official Government Admin Console Gateway"
+            >
+              <Lock className="h-3.5 w-3.5 text-emerald-400" />
+              <span>{t.openAdminConsole} →</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

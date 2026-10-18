@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chennai Elevation (DEM) CSV Generator — Free, Open-Elevation API</title>
+<style>
+  :root {
+    --bg: #0f1720;
+    --card: #17212b;
+    --accent: #3ddc97;
+    --text: #e6edf3;
+    --muted: #93a3b3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 32px;
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  }
+  h1 {
+    font-size: 20px;
+    margin: 0 0 6px 0;
+  }
+  p.sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 24px 0;
+    line-height: 1.5;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 4px;
+    margin-top: 14px;
+  }
+  input {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #2b3947;
+    background: #0f1720;
+    color: var(--text);
+    font-size: 14px;
+  }
+  .row { display: flex; gap: 12px; }
+  .row > div { flex: 1; }
+  button {
+    margin-top: 24px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #08130d;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  #status {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--muted);
+    min-height: 18px;
+  }
+  #bar {
+    height: 6px;
+    border-radius: 3px;
+    background: #0f1720;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  #barFill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.2s;
+  }
+  .note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 20px;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Chennai Elevation (DEM) → CSV</h1>
+  <p class="sub">Pulls real elevation values (SRTM/ASTER-based) from the free, public
+  <a href="https://open-elevation.com" target="_blank" style="color:var(--accent)">Open-Elevation API</a>
+  for a grid of points over Chennai, then downloads a CSV of latitude, longitude, elevation (m).</p>
+
+  <div class="row">
+    <div>
+      <label>Min Latitude</label>
+      <input id="latMin" type="number" step="0.01" value="12.85">
+    </div>
+    <div>
+      <label>Max Latitude</label>
+      <input id="latMax" type="number" step="0.01" value="13.25">
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <label>Min Longitude</label>
+      <input id="lonMin" type="number" step="0.01" value="80.10">
+    </div>
+    <div>
+      <label>Max Longitude</label>
+      <input id="lonMax" type="number" step="0.01" value="80.35">
+    </div>
+  </div>
+  <label>Grid spacing (degrees, ~0.01 ≈ 1.1 km)</label>
+  <input id="step" type="number" step="0.005" value="0.02">
+
+  <button id="go">Generate & Download CSV</button>
+  <div id="bar"><div id="barFill"></div></div>
+  <div id="status">Default box covers Chennai city + coastline.</div>
+
+  <div class="note">
+    Data source: Open-Elevation (open, no API key, no cost). Runs entirely in your browser —
+    no data leaves your machine except requests to the elevation API itself. Larger boxes /
+    finer spacing = more points = longer wait (public API is rate-limited).
+  </div>
+</div>
+
+<script>
+const btn = document.getElementById('go');
+const status = document.getElementById('status');
+const barFill = document.getElementById('barFill');
+
+function buildGrid(latMin, latMax, lonMin, lonMax, step) {
+  const pts = [];
+  for (let la = latMin; la <= latMax + 1e-9; la += step) {
+    for (let lo = lonMin; lo <= lonMax + 1e-9; lo += step) {
+      pts.push({ latitude: parseFloat(la.toFixed(5)), longitude: parseFloat(lo.toFixed(5)) });
+    }
+  }
+  return pts;
+}
+
+async function fetchElevations(points) {
+  const results = [];
+  const batchSize = 100;
+  for (let i = 0; i < points.length; i += batchSize) {
+    const batch = points.slice(i, i + batchSize);
+    status.textContent = `Fetching elevations… ${i} / ${points.length}`;
+    barFill.style.width = `${Math.round((i / points.length) * 100)}%`;
+    try {
+      const res = await fetch('https://api.open-elevation.com/api/v1/lookup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ locations: batch })
+      });
+      if (!res.ok) throw new Error('API error ' + res.status);
+      const data = await res.json();
+      data.results.forEach(r => results.push(r));
+    } catch (err) {
+      status.textContent = `Error on batch starting at ${i}: ${err.message}. Retrying once…`;
+      await new Promise(r => setTimeout(r, 1500));
+      try {
+        const res = await fetch('https://api.open-elevation.com/api/v1/lookup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ locations: batch })
+        });
+        const data = await res.json();
+        data.results.forEach(r => results.push(r));
+      } catch (err2) {
+        status.textContent = `Failed batch at ${i}, skipping: ${err2.message}`;
+      }
+    }
+  }
+  return results;
+}
+
+function toCSV(rows) {
+  const header = 'latitude,longitude,elevation_m\n';
+  const body = rows.map(r => `${r.latitude},${r.longitude},${r.elevation}`).join('\n');
+  return header + body;
+}
+
+function download(filename, text) {
+  const blob = new Blob([text], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+btn.addEventListener('click', async () => {
+  const latMin = parseFloat(document.getElementById('latMin').value);
+  const latMax = parseFloat(document.getElementById('latMax').value);
+  const lonMin = parseFloat(document.getElementById('lonMin').value);
+  const lonMax = parseFloat(document.getElementById('lonMax').value);
+  const step = parseFloat(document.getElementById('step').value);
+
+  const points = buildGrid(latMin, latMax, lonMin, lonMax, step);
+  if (points.length > 2000) {
+    status.textContent = `Too many points (${points.length}). Increase spacing or shrink the box (max ~2000).`;
+    return;
+  }
+
+  btn.disabled = true;
+  status.textContent = `Preparing ${points.length} points…`;
+  barFill.style.width = '0%';
+
+  const results = await fetchElevations(points);
+
+  barFill.style.width = '100%';
+  status.textContent = `Done. Retrieved ${results.length} / ${points.length} points. Downloading CSV…`;
+
+  const csv = toCSV(results);
+  download('chennai_elevation.csv', csv);
+
+  status.textContent = `Done! chennai_elevation.csv downloaded (${results.length} points).`;
+  btn.disabled = false;
+});
+</script>
+</body>
+</html>

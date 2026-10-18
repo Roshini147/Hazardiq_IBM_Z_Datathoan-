@@ -1,0 +1,25 @@
+{
+  "platform": "IBM LinuxONE Community Cloud",
+  "architecture": "s390x / LinuxONE III",
+  "os": "Ubuntu 24.04 LTS",
+  "engine": "HAZARDIQ AI/ML Core v2.1",
+  "trained_at": "2026-10-18T11:17:38.500320Z",
+  "metrics": {
+    "classifier_cv_accuracy_mean": 0.8625,
+    "classifier_cv_accuracy_std": 0.0158,
+    "regressor_r2_score": 0.995,
+    "regressor_mae_persons": 73.4,
+    "sample_size": 400,
+    "algorithm_classifier": "RandomForestClassifier(n_estimators=100)",
+    "algorithm_regressor": "GradientBoostingRegressor(n_estimators=100)"
+  },
+  "feature_importances": {
+    "elevation_m": 0.2,
+    "rainfall_24h_mm": 0.3052,
+    "distance_to_drain_km": 0.1171,
+    "population_density_per_sqkm": 0.1057,
+    "shelter_deficit_ratio": 0.1283,
+    "historical_event_count": 0.056,
+    "socio_vulnerability_index": 0.0877
+  }
+}

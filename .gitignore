@@ -1,0 +1,43 @@
+# Environment & Secrets
+.env
+*.pem
+*.key
+*.p12
+
+# Binaries & Executables
+cloudflared.exe
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Dependencies
+node_modules/
+.venv/
+env/
+venv/
+
+# Build outputs
+dist/
+frontend/dist/
+build/
+*.egg-info/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+
+# Databases & local state
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs & temp files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db

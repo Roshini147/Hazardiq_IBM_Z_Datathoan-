@@ -1,0 +1,19 @@
+[Unit]
+Description=HAZARDIQ - Disaster Risk & Relocation Intelligence Platform (IBM LinuxONE)
+After=network.target
+
+[Service]
+Type=simple
+User=linux1
+WorkingDirectory=/home/linux1/HAZARDIQ/server
+ExecStart=/usr/bin/npm run start
+Restart=on-failure
+RestartSec=10
+Environment=NODE_ENV=production
+Environment=PORT=3000
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=hazardiq
+
+[Install]
+WantedBy=multi-user.target

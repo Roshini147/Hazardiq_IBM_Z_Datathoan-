@@ -1,0 +1,75 @@
+metric,value,percentage_of_total_hh,total_households
+Owned - No exclusive room,11179,,1154982
+Owned - One room,177190,,1154982
+Owned - Two rooms,146451,,1154982
+Owned - Three rooms,116097,,1154982
+Owned - 3+ rooms,71576,,1154982
+Rented - No exclusive room,14236,,1154982
+Rented - One room,242496,,1154982
+Rented - Two rooms,188227,,1154982
+Rented - Three rooms,93042,,1154982
+Rented - 3+ rooms,27933,,1154982
+Others - No exclusive room,762,,1154982
+Others - One room,7744,,1154982
+Others - Two rooms,4579,,1154982
+Others - Three rooms,3639,,1154982
+Others - 3+ rooms,1416,,1154982
+Permanent houses,1040948,94.07,1106567
+Semi-permanent houses,42810,3.87,1106567
+Temporary houses,17204,1.55,1106567
+Drinking water - Tap treated source,874596,79.04,1106567
+Drinking water - Tap untreated source,33991,3.07,1106567
+Drinking water - Covered well,4775,0.43,1106567
+Drinking water - Un-covered well,3500,0.32,1106567
+Drinking water - Handpump,126701,11.45,1106567
+Drinking water - Tubewell/borehole,43461,3.93,1106567
+Drinking water - Spring,1061,0.10,1106567
+Drinking water - River/canal,49,0.00,1106567
+Drinking water - Tank/pond/lake,80,0.01,1106567
+Drinking water - Other sources,18353,1.66,1106567
+Lighting - Electricity,1096334,99.08,1106567
+Lighting - Kerosene,8547,0.77,1106567
+Lighting - Solar,296,0.03,1106567
+Lighting - Other oil,275,0.02,1106567
+Lighting - Any other,348,0.03,1106567
+Lighting - No lighting,767,0.07,1106567
+Latrine - Flush/pour piped sewer,1026027,92.72,1106567
+Latrine - Flush/pour septic tank,17821,1.61,1106567
+Latrine - Flush/pour other system,2587,0.23,1106567
+Latrine - Pit with slab/VIP,5650,0.51,1106567
+Latrine - Pit without slab/open pit,1790,0.16,1106567
+Latrine - Night soil disposed into open drain,2888,0.26,1106567
+Latrine - Service latrine (night soil removed by human),463,0.04,1106567
+Latrine - Service latrine (night soil serviced by animals),576,0.05,1106567
+Latrine - Public latrine,42212,3.81,1106567
+Latrine - No latrine within premises (open),6553,0.59,1106567
+Drainage - Closed drainage,1062231,95.99,1106567
+Drainage - Open drainage,14107,1.27,1106567
+Drainage - No drainage,30229,2.73,1106567
+Kitchen - Inside house with kitchen,1038728,93.87,1106567
+Kitchen - Inside house no kitchen,53334,4.82,1106567
+Kitchen - Outside house with kitchen,4791,0.43,1106567
+Kitchen - Outside house no kitchen,5411,0.49,1106567
+Kitchen - No cooking,4303,0.39,1106567
+Cooking fuel - Firewood,30908,2.79,1106567
+Cooking fuel - Crop residue,1757,0.16,1106567
+Cooking fuel - Cowdung cake,744,0.07,1106567
+Cooking fuel - Coal/lignite/charcoal,256,0.02,1106567
+Cooking fuel - Kerosene,154969,14.00,1106567
+Cooking fuel - LPG/PNG,910262,82.26,1106567
+Cooking fuel - Electricity,695,0.06,1106567
+Cooking fuel - Bio-gas,2054,0.19,1106567
+Cooking fuel - Any other,619,0.06,1106567
+Cooking fuel - No cooking,4303,0.39,1106567
+Availing banking services,787027,71.12,1106567
+Asset - Radio/Transistor,398414,36.00,1106567
+Asset - Television,1055696,95.40,1106567
+Asset - Computer/laptop with internet,217368,19.64,1106567
+Asset - Computer/laptop without internet,138470,12.51,1106567
+Asset - Landline telephone,114191,10.32,1106567
+Asset - Mobile telephone,688857,62.25,1106567
+Asset - Both landline and mobile,214074,19.35,1106567
+Asset - Bicycle,409796,37.03,1106567
+Asset - Scooter/motorcycle/moped,515581,46.59,1106567
+Asset - Car/Jeep/Van,146388,13.23,1106567
+Asset - None of the specified assets,10634,0.96,1106567

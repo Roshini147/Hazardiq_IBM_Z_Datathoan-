@@ -1,0 +1,11 @@
+Category,Total,Male,Female,Boundary/Area,Census Year,Official Source
+Total Population (old limits),4646732,2335844,2310888,175 sq.km (pre-2018 limits),2011,"Tamil Nadu Dept. of Economics & Statistics - Statistical Handbook (des.tn.gov.in)"
+Total Population (expanded limits),6748026,,,"426 sq.km (post-2018 expanded Chennai district)",2011,"Census of India 2011 / Chennai district official profile (chennai.nic.in)"
+Literates,3776276,1968079,1808197,175 sq.km (pre-2018 limits),2011,"Census of India 2011 (Primary Census Abstract)"
+Scheduled Castes (% of pop.),16.78%,,,175 sq.km (pre-2018 limits),2011,"Census of India 2011 (Primary Census Abstract)"
+Scheduled Tribes (% of pop.),0.22%,,,175 sq.km (pre-2018 limits),2011,"Census of India 2011 (Primary Census Abstract)"
+Sex Ratio (females per 1000 males),989,,,175 sq.km (pre-2018 limits),2011,"Census of India 2011 (Primary Census Abstract)"
+
+NOTE:,,,,,,
+"Children (age 1-10) and Persons with Disabilities are NOT included here because they require Census Table C-13 (age data) and C-20 (disability data) respectively - these are state-level files with a Chennai district row embedded in them, not standalone district files. Download C-20 (Tamil Nadu) here: https://censusindia.gov.in/nada/index.php/catalog/43402",,,,,,
+"No Census has been conducted in India since 2011 (2021 Census was postponed and has not yet occurred), so 2011 remains the latest official figure for these breakdowns.",,,,,,
